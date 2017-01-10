@@ -1,8 +1,9 @@
-package xyz.enableit.shaketopup;
+package xyz.enableit.shaketopup.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
 /**

@@ -1,12 +1,16 @@
-package xyz.enableit.shaketopup;
+package xyz.enableit.shaketopup.service;
 
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.IBinder;
 import android.util.Log;
+
+import xyz.enableit.shaketopup.ShakeDetector;
 
 /**
  * Created by dinislam on 11/6/16.
@@ -16,6 +20,7 @@ public class ShakeService extends Service {
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private ShakeDetector mShakeDetector;
+
 
     public ShakeService() {
     }
@@ -31,21 +36,23 @@ public class ShakeService extends Service {
         super.onCreate();
         // ShakeDetector initialization
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mAccelerometer = mSensorManager
-                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
         mShakeDetector = new ShakeDetector();
         mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
 
             @Override
             public void onShake(int count) {
 
-                Intent i = getApplicationContext().getPackageManager().getLaunchIntentForPackage("xyz.enableit.shaketopup");
+                Intent i = getApplicationContext().getPackageManager().
+                        getLaunchIntentForPackage("xyz.enableit.shaketopup");
                 i.putExtra("launchFromService",1);
                 getApplicationContext().startActivity(i);
 
             }
         });
         mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
+
     }
 
 

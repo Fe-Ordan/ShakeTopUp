@@ -1,4 +1,4 @@
-package xyz.enableit.shaketopup;
+package xyz.enableit.shaketopup.util;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -15,7 +15,6 @@ public class SAppUtil {
             e.printStackTrace();
 
         }
-
         return version;
     }
 }

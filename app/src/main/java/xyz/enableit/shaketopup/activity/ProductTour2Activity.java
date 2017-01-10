@@ -1,4 +1,4 @@
-package xyz.enableit.shaketopup;
+package xyz.enableit.shaketopup.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -19,6 +19,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.nineoldandroids.view.ViewHelper;
+
+import xyz.enableit.shaketopup.MainActivity;
+import xyz.enableit.shaketopup.R;
+import xyz.enableit.shaketopup.fragment.ProductTourFragment;
 
 /**
  * Created by dinislam on 11/7/16.

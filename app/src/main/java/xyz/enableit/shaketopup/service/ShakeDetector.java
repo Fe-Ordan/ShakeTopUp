@@ -1,4 +1,4 @@
-package xyz.enableit.shaketopup;
+package xyz.enableit.shaketopup.service;
 
 /**
  * Created by dinislam on 11/6/16.
@@ -40,8 +40,9 @@ public class ShakeDetector implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        Sensor mySensor = event.sensor;
 
-        if (mListener != null) {
+        if (mListener != null && mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             float x = event.values[0];
             float y = event.values[1];
             float z = event.values[2];

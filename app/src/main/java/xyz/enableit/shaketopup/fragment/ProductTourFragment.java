@@ -1,4 +1,4 @@
-package xyz.enableit.shaketopup;
+package xyz.enableit.shaketopup.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
