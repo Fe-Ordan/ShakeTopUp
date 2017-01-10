@@ -1,8 +1,10 @@
 package xyz.enableit.shaketopup.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,20 +16,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import xyz.enableit.shaketopup.PrefConstants;
+import xyz.enableit.shaketopup.dialog.DialogOperatorChooser;
+import xyz.enableit.shaketopup.util.PrefConstants;
 import xyz.enableit.shaketopup.R;
-import xyz.enableit.shaketopup.SAppUtil;
+import xyz.enableit.shaketopup.util.SAppUtil;
 import xyz.enableit.shaketopup.fragment.FragmentHome;
 import xyz.enableit.shaketopup.service.ShakeService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    int launchFromService;
+    private int launchFromService, selectedOperator;
+    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +44,20 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Todo will decide later
-        operatorChooserDialog();
+        //check operator has been selected or not
+        sharedPref = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        selectedOperator = Integer.parseInt(sharedPref.getString(getString(R.string.operator), "-1"));
+
+        Log.d("Ope", "" + selectedOperator);
+        if (selectedOperator == -1) {
+            Log.d("Ope", "" + selectedOperator);
+            // operatorChooserDialog();
+
+            DialogOperatorChooser chooser = new DialogOperatorChooser();
+            chooser.show(getSupportFragmentManager(), "MainActivity");
+        }
+
 
         //set home fragment
         changeFragment(new FragmentHome());
@@ -49,7 +67,7 @@ public class MainActivity extends AppCompatActivity
         startService(intent);
 
 
-      //  getSupportFragmentManager().beginTransaction().replace(R.id.container, new FragmentHome()).commit();
+        //  getSupportFragmentManager().beginTransaction().replace(R.id.container, new FragmentHome()).commit();
 
         //calling from service need to recharge
         launchFromService = getIntent().getIntExtra("launchFromService", 0);
@@ -121,43 +139,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void operatorChooserDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle(R.string.operator_dialog_title);
-
-        //list of items
-        String[] items = getResources().getStringArray(R.array.operator_list);
-        builder.setSingleChoiceItems(items, 0,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // item selected logic
-                    }
-                });
-
-        String positiveText = getString(android.R.string.ok);
-        builder.setPositiveButton(positiveText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // positive button logic
-                    }
-                });
-
-        String negativeText = getString(android.R.string.cancel);
-        builder.setNegativeButton(negativeText,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // negative button logic
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        // display dialog
-        dialog.show();
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -168,8 +149,8 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
             //startActivity(new Intent(MainActivity.this,SettingsActivity.class));
         } else if (id == R.id.nav_gallery) {
-           // startActivity(new Intent(MainActivity.this,ActivitySetting.class));
-            Intent i = new Intent(this, Main2Activity.class);
+            // startActivity(new Intent(MainActivity.this,ActivitySetting.class));
+            Intent i = new Intent(this, SettingActivity.class);
             startActivity(i);
 
         } else if (id == R.id.nav_slideshow) {

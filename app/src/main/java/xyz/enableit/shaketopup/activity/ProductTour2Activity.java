@@ -20,7 +20,6 @@ import android.widget.LinearLayout;
 
 import com.nineoldandroids.view.ViewHelper;
 
-import xyz.enableit.shaketopup.MainActivity;
 import xyz.enableit.shaketopup.R;
 import xyz.enableit.shaketopup.fragment.ProductTourFragment;
 

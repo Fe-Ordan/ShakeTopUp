@@ -5,4 +5,50 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="operator_dialog_title">Choose an operator</string>
+
+    <string-array name="operator_list">
+        <item>Grameenphone</item>
+        <item>Banglalink</item>
+        <item>Robi</item>
+        <item>Airtel</item>
+        <item>Teletalk</item>
+    </string-array>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+    <string name="pref_title_recommendations">Offer Notification</string>
+    <string name="pref_description_recommendations">Get amazing offers for you from operators</string>
+
+    <string name="pref_title_shake">Shake Topup</string>
+    <string name="pref_description_shake">Get emergency balance by shaking</string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="operator">operator_list</string>
+
+    <string name="pref_title_add_list_operator">Select your operator</string>
+    <string-array name="pref_example_list_titles">
+        <item>Grameenphone</item>
+        <item>Banglalink</item>
+        <item>Robi</item>
+        <item>Airtel</item>
+        <item>Teletalk</item>
+    </string-array>
+
+    <string-array name="pref_example_list_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+
+    </string-array>
+
+
+    <string name="title_activity_setting_example">SettingExampleActivity</string>
 </resources>

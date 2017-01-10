@@ -8,13 +8,14 @@ import android.view.MenuItem;
 import xyz.enableit.shaketopup.R;
 import xyz.enableit.shaketopup.activity.AppCompatPreferenceActivity;
 
-public class Main2Activity extends AppCompatPreferenceActivity {
+public class SettingActivity extends AppCompatPreferenceActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
-        getFragmentManager().beginTransaction().replace(android.R.id.content, new PrefsFragment()).commit();
+        getFragmentManager().beginTransaction().replace(android.R.id.content,
+                                                                 new PrefsFragment()).commit();
     }
 
     private void setupActionBar() {
