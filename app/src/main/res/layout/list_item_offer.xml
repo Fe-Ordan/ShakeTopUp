@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
+    android:layout_height="70dp"
     android:layout_marginBottom="@dimen/cardMarginVertical"
     android:layout_marginLeft="@dimen/cardMarginHorizontal"
     android:layout_marginRight="@dimen/cardMarginHorizontal"
@@ -19,7 +19,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageview_radio_logo"
+            android:id="@+id/offer_operator"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
@@ -31,21 +31,21 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="24dp"
-            android:layout_toRightOf="@+id/imageview_radio_logo">
+            android:layout_toRightOf="@+id/offer_operator">
 
             <TextView
-                android:id="@+id/textview_radio_name"
+                android:id="@+id/offer_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Radio Number One"
                 android:textColor="@color/color_gray" />
 
             <TextView
-                android:id="@+id/textview_tags"
+                android:id="@+id/offer_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/textview_radio_name"
-                android:layout_below="@+id/textview_radio_name"
+                android:layout_alignLeft="@+id/offer_title"
+                android:layout_below="@+id/offer_title"
                 android:layout_marginTop="8dp"
                 android:text="sub title"
                 android:textColor="@color/color_pink" />
