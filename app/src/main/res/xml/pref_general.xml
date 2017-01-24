@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <SwitchPreference
         android:defaultValue="true"
-        android:key="pref_shake_top_up"
+        android:key="@string/pref_shake_top_up"
         android:summary="@string/pref_description_shake"
         android:title="@string/pref_title_shake" />
 

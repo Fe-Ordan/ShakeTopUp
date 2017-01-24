@@ -25,6 +25,7 @@
 
     <string name="pref_title_shake">Shake Topup</string>
     <string name="pref_description_shake">Get emergency balance by shaking</string>
+    <string name="pref_shake_top_up">pref_shake_top_up</string>
 
     <string name="pref_title_display_name">Display name</string>
     <string name="pref_default_display_name">John Smith</string>

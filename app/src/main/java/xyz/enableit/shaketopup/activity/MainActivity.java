@@ -35,9 +35,13 @@ public class MainActivity extends AppCompatActivity
     private int launchFromService, selectedOperator;
     private SharedPreferences sharedPref;
 
+
+    //private enum Operator {Grameenphone, Banglalink, Robi, Airtel, Teletalk}
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         checkShowTutorial();
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -47,33 +51,33 @@ public class MainActivity extends AppCompatActivity
         //check operator has been selected or not
         sharedPref = PreferenceManager
                 .getDefaultSharedPreferences(this);
+
         selectedOperator = Integer.parseInt(sharedPref.getString(getString(R.string.operator), "-1"));
-
-        Log.d("Ope", "" + selectedOperator);
         if (selectedOperator == -1) {
-            Log.d("Ope", "" + selectedOperator);
-            // operatorChooserDialog();
-
             DialogOperatorChooser chooser = new DialogOperatorChooser();
             chooser.show(getSupportFragmentManager(), "MainActivity");
         }
 
-
         //set home fragment
         changeFragment(new FragmentHome());
 
+
         //start service
         Intent intent = new Intent(MainActivity.this, ShakeService.class);
-        startService(intent);
+        if (sharedPref.getBoolean(getString(R.string.pref_shake_top_up), true)) {
+            startService(intent);
+        } else {
+            stopService(intent);
+        }
 
-
-        //  getSupportFragmentManager().beginTransaction().replace(R.id.container, new FragmentHome()).commit();
+        //stopService(intent);
 
         //calling from service need to recharge
         launchFromService = getIntent().getIntExtra("launchFromService", 0);
         if (launchFromService == 1) {
             //check setting from preference
-            dialForRecharge(0);
+            dialForRecharge(selectedOperator);
+            Log.d("Service Call", "" + selectedOperator);
         }
 
 
@@ -92,30 +96,38 @@ public class MainActivity extends AppCompatActivity
 
         String dialNumber = "";
         switch (carrier) {
+            //GP
             case 0:
+                dialNumber = "*" + "1010" + "*" + Uri.encode("#");
+                break;
+            //BL
+            case 1:
                 dialNumber = "*" + "874" + Uri.encode("#");
                 break;
-            case 1:
-                dialNumber = "*" + "1010" + "*" + Uri.encode("#");
-                break;
+            //Ro
             case 2:
-                dialNumber = "*" + "1010" + "*" + Uri.encode("#");
+                //*8811*1*1*1#
+                dialNumber = "*" + "8811" + "*" + "1" + "*" + "1" + "*" + "1" + Uri.encode("#");
+                break;
+            //Air
+            case 3:
+                dialNumber = "*141*10" + Uri.encode("#");
+                break;
+            //Tel
+            case 4:
+                dialNumber = "*1122" + Uri.encode("#");
                 break;
         }
 
+        Log.d("Number", "" + Uri.parse("tel:" + dialNumber));
         if (dialNumber.equals("")) {
             Toast.makeText(this, "Not found", Toast.LENGTH_SHORT).show();
         } else {
             //code for calling
             Intent intentEmergencyBalance = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + dialNumber));
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                startActivity(intentEmergencyBalance);
-            }
+            //startActivity(intentEmergencyBalance);
 
         }
-
-
     }
 
     @Override
@@ -144,28 +156,25 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment fragment = null;
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-            //startActivity(new Intent(MainActivity.this,SettingsActivity.class));
-        } else if (id == R.id.nav_gallery) {
-            // startActivity(new Intent(MainActivity.this,ActivitySetting.class));
+        if (id == R.id.nav_short_code) {
+
+        } else if (id == R.id.nav_offer) {
+            fragment = new FragmentHome();
+
+        } else if (id == R.id.nav_news) {
+
+        } else if (id == R.id.nav_setting) {
             Intent i = new Intent(this, SettingActivity.class);
             startActivity(i);
-
-        } else if (id == R.id.nav_slideshow) {
-            //startActivity(new Intent(MainActivity.this,SettingsExampleActivity.class));
-
-        } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
-
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        changeFragment(fragment);
+
         return true;
     }
 

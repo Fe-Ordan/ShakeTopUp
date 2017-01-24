@@ -3,10 +3,14 @@ package xyz.enableit.shaketopup.service;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.IBinder;
+import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
+
+import xyz.enableit.shaketopup.R;
 
 /**
  * Created by dinislam on 11/6/16.
@@ -40,10 +44,15 @@ public class ShakeService extends Service {
             @Override
             public void onShake(int count) {
 
-                Intent i = getApplicationContext().getPackageManager().
-                        getLaunchIntentForPackage("xyz.enableit.shaketopup");
-                i.putExtra("launchFromService",1);
-                getApplicationContext().startActivity(i);
+                SharedPreferences preferences = PreferenceManager
+                        .getDefaultSharedPreferences(getApplicationContext());
+                if (preferences.getBoolean(getString(R.string.pref_shake_top_up),true)){
+                    Intent i = getApplicationContext().getPackageManager().
+                            getLaunchIntentForPackage("xyz.enableit.shaketopup");
+                    i.putExtra("launchFromService", 1);
+                    getApplicationContext().startActivity(i);
+                }
+
 
             }
         });

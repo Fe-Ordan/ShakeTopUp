@@ -21,12 +21,15 @@ public class FragmentHome extends Fragment {
         // Required empty public constructor
     }
 
+    private View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        return rootView;
     }
 
 }

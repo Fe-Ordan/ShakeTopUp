@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "858720543183",
+    "firebase_url": "https://shaketopup.firebaseio.com",
+    "project_id": "shaketopup",
+    "storage_bucket": "shaketopup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858720543183:android:a8c3ff8bf747857e",
+        "android_client_info": {
+          "package_name": "xyz.enableit.shaketopup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858720543183-5s9e3ptvrsjj1cvc36vuk4t9oid8t1bg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAqMuyt5ylwqy0JYBXKRuqLA4JGEjvxhU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
