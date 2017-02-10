@@ -4,10 +4,9 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:layout_marginBottom="@dimen/cardMarginVertical"
     android:layout_marginLeft="@dimen/cardMarginHorizontal"
     android:layout_marginRight="@dimen/cardMarginHorizontal"
-    android:layout_marginTop="@dimen/cardMarginVertical"
+    android:layout_marginTop="@dimen/cardMarginTop"
     android:background="@color/color_white"
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
@@ -18,39 +17,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/offer_operator"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="24dp"
-            android:src="@drawable/ic_menu_camera" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="24dp"
-            android:layout_toRightOf="@+id/offer_operator">
+            android:layout_marginLeft="24dp">
 
             <TextView
-                android:id="@+id/offer_title"
+                android:id="@+id/code_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Radio Number One"
+                android:text="Let you know about FTA SW Version"
                 android:textColor="@color/color_gray" />
 
             <TextView
-                android:id="@+id/offer_detail"
+
+                android:id="@+id/short_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/offer_title"
-                android:layout_below="@+id/offer_title"
+                android:layout_alignLeft="@+id/code_detail"
+                android:layout_below="@+id/code_detail"
                 android:layout_marginTop="8dp"
-                android:text="sub title"
+                android:text="*#*#1111#*#*"
                 android:textColor="@color/color_pink" />
 
         </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:src="@android:drawable/ic_menu_call" />
 
     </RelativeLayout>
 

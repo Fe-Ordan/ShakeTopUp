@@ -14,66 +14,83 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import xyz.enableit.shaketopup.R;
-import xyz.enableit.shaketopup.model.Offer;
+import xyz.enableit.shaketopup.listener.ListItemClickListener;
+import xyz.enableit.shaketopup.model.UssdCode;
 
 /**
  * Created by dinislam on 1/25/17.
  * email : milon@strativ.se
  */
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RadioViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.OfferViewHolder> {
 
     private Context context;
+    private List<UssdCode> ussdCodeList = new ArrayList<>();
+    private ListItemClickListener listItemClickListener;
 
-    private List<Offer> offerList;
-
-    public RecyclerViewAdapter(Context context) {
+    public RecyclerViewAdapter(Context context, ListItemClickListener listItemClickListener) {
         this.context = context;
-        offerList = new ArrayList<>();
+        this.listItemClickListener = listItemClickListener;
+
     }
 
-    public void setOfferList(List<Offer> offerList) {
-        this.offerList = offerList;
+    public void setUssdCodeList(List<UssdCode> ussdCodeList) {
+        this.ussdCodeList = ussdCodeList;
         notifyDataSetChanged();
     }
 
     @Override
-    public RadioViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public OfferViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_offer, parent, false);
-        RadioViewHolder viewHolder = new RadioViewHolder(view);
+        OfferViewHolder viewHolder = new OfferViewHolder(view);
+
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(RadioViewHolder holder, final int position) {
+    public void onBindViewHolder(OfferViewHolder holder, final int position) {
 
-        Offer offer = offerList.get(position);
-        holder.offerTitle.setText(offer.getTitle());
-        holder.offerDetail.setText(offer.getDetail());
+        UssdCode ussdCode = ussdCodeList.get(position);
+
+        //set data
+        holder.codeDetail.setText(ussdCode.getDescription());
+        holder.shortCode.setText(ussdCode.getShortCode());
 
     }
 
     @Override
     public int getItemCount() {
-        return offerList.size();
+        return ussdCodeList.size();
     }
 
-    public class RadioViewHolder extends RecyclerView.ViewHolder {
+    public class OfferViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @Bind(R.id.offer_title)
-        TextView offerTitle;
+        @Bind(R.id.code_detail)
+        TextView codeDetail;
 
-        @Bind(R.id.offer_detail)
-        TextView offerDetail;
+        @Bind(R.id.short_code)
+        TextView shortCode;
 
 
-        @Bind(R.id.imageview_radio_logo)
-        ImageView offerOperator;
+        @Bind(R.id.arrow)
+        ImageView arrow;
 
-        public RadioViewHolder(View itemView) {
+
+        public OfferViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
+            //set click listener
+            //itemView.setOnClickListener(this);
+            //codeDetail.setOnClickListener(this);
+            arrow.setOnClickListener(this);
+            //shortCode.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            listItemClickListener.clickPosition(getAdapterPosition(), view.getId());
         }
     }
 

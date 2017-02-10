@@ -1,20 +1,14 @@
 package xyz.enableit.shaketopup.activity;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
@@ -23,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import xyz.enableit.shaketopup.dialog.DialogOperatorChooser;
+import xyz.enableit.shaketopup.offer.FragmentOffer;
 import xyz.enableit.shaketopup.util.PrefConstants;
 import xyz.enableit.shaketopup.R;
 import xyz.enableit.shaketopup.util.SAppUtil;
@@ -34,7 +29,6 @@ public class MainActivity extends AppCompatActivity
 
     private int launchFromService, selectedOperator;
     private SharedPreferences sharedPref;
-
 
     //private enum Operator {Grameenphone, Banglalink, Robi, Airtel, Teletalk}
 
@@ -69,8 +63,6 @@ public class MainActivity extends AppCompatActivity
         } else {
             stopService(intent);
         }
-
-        //stopService(intent);
 
         //calling from service need to recharge
         launchFromService = getIntent().getIntExtra("launchFromService", 0);
@@ -156,6 +148,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         Fragment fragment = null;
 
         if (id == R.id.nav_short_code) {
@@ -164,14 +157,17 @@ public class MainActivity extends AppCompatActivity
             fragment = new FragmentHome();
 
         } else if (id == R.id.nav_news) {
+            fragment = new FragmentOffer();
 
         } else if (id == R.id.nav_setting) {
             Intent i = new Intent(this, SettingActivity.class);
             startActivity(i);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
         } else if (id == R.id.nav_share) {
 
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         drawer.closeDrawer(GravityCompat.START);
         changeFragment(fragment);
 
@@ -181,6 +177,5 @@ public class MainActivity extends AppCompatActivity
     public void changeFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
     }
-
 
 }

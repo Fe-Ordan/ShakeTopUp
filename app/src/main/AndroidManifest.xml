@@ -6,6 +6,7 @@
         android:name="android.hardware.sensor.accelerometer"
         android:required="true" />
 
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -46,6 +47,9 @@
         </receiver>
 
         <activity android:name=".activity.SettingActivity"></activity>
+        <activity
+            android:name=".offer.OfferDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar.Translucent"></activity>
     </application>
 
 </manifest>
