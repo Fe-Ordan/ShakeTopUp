@@ -1,10 +1,13 @@
 package xyz.enableit.shaketopup.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,11 +20,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import xyz.enableit.shaketopup.dialog.DialogOperatorChooser;
+import xyz.enableit.shaketopup.fragment.FragmentVAS;
 import xyz.enableit.shaketopup.offer.FragmentOffer;
 import xyz.enableit.shaketopup.util.PrefConstants;
 import xyz.enableit.shaketopup.R;
 import xyz.enableit.shaketopup.util.SAppUtil;
-import xyz.enableit.shaketopup.fragment.FragmentHome;
+import xyz.enableit.shaketopup.fragment.FragmentShortCode;
 import xyz.enableit.shaketopup.service.ShakeService;
 
 public class MainActivity extends AppCompatActivity
@@ -53,7 +57,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         //set home fragment
-        changeFragment(new FragmentHome());
+        changeFragment(new FragmentOffer());
 
 
         //start service
@@ -117,7 +121,17 @@ public class MainActivity extends AppCompatActivity
         } else {
             //code for calling
             Intent intentEmergencyBalance = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + dialNumber));
-            //startActivity(intentEmergencyBalance);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                startActivity(intentEmergencyBalance);
+            }
+
 
         }
     }
@@ -152,13 +166,11 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
 
         if (id == R.id.nav_short_code) {
-
+            fragment = new FragmentShortCode();
         } else if (id == R.id.nav_offer) {
-            fragment = new FragmentHome();
-
+            fragment = new FragmentVAS();
         } else if (id == R.id.nav_news) {
             fragment = new FragmentOffer();
-
         } else if (id == R.id.nav_setting) {
             Intent i = new Intent(this, SettingActivity.class);
             startActivity(i);

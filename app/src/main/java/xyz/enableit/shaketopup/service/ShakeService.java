@@ -44,6 +44,8 @@ public class ShakeService extends Service {
             @Override
             public void onShake(int count) {
 
+                Log.d("Shake Count",""+count);
+
                 SharedPreferences preferences = PreferenceManager
                         .getDefaultSharedPreferences(getApplicationContext());
                 if (preferences.getBoolean(getString(R.string.pref_shake_top_up),true)){
@@ -52,14 +54,10 @@ public class ShakeService extends Service {
                     i.putExtra("launchFromService", 1);
                     getApplicationContext().startActivity(i);
                 }
-
-
             }
         });
         mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
-
     }
-
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {

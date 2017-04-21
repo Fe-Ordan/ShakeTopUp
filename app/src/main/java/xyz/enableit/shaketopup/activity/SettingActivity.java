@@ -1,5 +1,7 @@
 package xyz.enableit.shaketopup.activity;
 
+import android.content.SharedPreferences;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
@@ -10,12 +12,14 @@ import xyz.enableit.shaketopup.activity.AppCompatPreferenceActivity;
 
 public class SettingActivity extends AppCompatPreferenceActivity {
 
+    public static final String KEY_PREF_SYNC_CONN = "pref_syncConnectionType";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
         getFragmentManager().beginTransaction().replace(android.R.id.content,
-                                                                 new PrefsFragment()).commit();
+                new PrefsFragment()).commit();
     }
 
     private void setupActionBar() {
@@ -35,6 +39,7 @@ public class SettingActivity extends AppCompatPreferenceActivity {
             super.onCreate(savedInstanceState);
             // Load the preferences from an XML resource
             addPreferencesFromResource(R.xml.pref_general);
+
         }
     }
 

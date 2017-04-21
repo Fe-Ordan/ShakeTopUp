@@ -36,8 +36,6 @@ public class ModelOfferImpl implements ModelOffer, ValueEventListener, ChildEven
 
         //for single item change, add, move or delete
         mDatabase.addChildEventListener(this);
-        Log.d("Start", "" + startAt);
-
         //fireBase query data
         Query pagination = mDatabase.orderByChild("id").startAt(startAt).endAt(startAt + 10);
         pagination.addListenerForSingleValueEvent(this);

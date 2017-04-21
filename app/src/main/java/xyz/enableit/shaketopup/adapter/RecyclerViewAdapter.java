@@ -35,6 +35,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public void setUssdCodeList(List<UssdCode> ussdCodeList) {
+
         this.ussdCodeList = ussdCodeList;
         notifyDataSetChanged();
     }
@@ -56,6 +57,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.codeDetail.setText(ussdCode.getDescription());
         holder.shortCode.setText(ussdCode.getShortCode());
 
+    }
+    public void clearAll() {
+        ussdCodeList.clear();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -92,6 +97,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public void onClick(View view) {
             listItemClickListener.clickPosition(getAdapterPosition(), view.getId());
         }
+
+
     }
 
 }
