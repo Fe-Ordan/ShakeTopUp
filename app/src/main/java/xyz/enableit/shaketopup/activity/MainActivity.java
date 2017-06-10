@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import xyz.enableit.shaketopup.dialog.DialogOperatorChooser;
+import xyz.enableit.shaketopup.fragment.AudioFragment;
 import xyz.enableit.shaketopup.fragment.FragmentVAS;
 import xyz.enableit.shaketopup.offer.FragmentOffer;
 import xyz.enableit.shaketopup.util.PrefConstants;
@@ -177,7 +178,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
             return true;
         } else if (id == R.id.nav_share) {
-
+            fragment = new AudioFragment();
         }
 
         drawer.closeDrawer(GravityCompat.START);

@@ -6,10 +6,13 @@
         android:name="android.hardware.sensor.accelerometer"
         android:required="true" />
 
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +26,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -46,10 +48,15 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.SettingActivity"></activity>
+        <activity android:name=".activity.SettingActivity" />
         <activity
             android:name=".offer.OfferDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar.Translucent"></activity>
+            android:theme="@style/AppTheme.NoActionBar.Translucent" />
+        <activity android:name=".tutorial.ActivitySignUp" />
+        <activity android:name=".tutorial.ActivityMain">
+
+
+        </activity>
     </application>
 
 </manifest>

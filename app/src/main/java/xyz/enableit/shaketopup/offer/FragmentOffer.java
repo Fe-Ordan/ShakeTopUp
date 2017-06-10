@@ -23,7 +23,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import xyz.enableit.shaketopup.R;
 
-import static com.google.android.gms.internal.zzs.TAG;
 
 /**
  * Created by dinislam on 2/8/17.
